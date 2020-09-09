@@ -11,3 +11,11 @@ steps:
         from_secret: docker_username
       password:
         from_secret: docker_password
+    volumes:
+      - name: dockercache
+        path: /var/lib/docker
+
+volumes:
+- name: dockercache
+  host:
+    path: /tmp/docker/${DRONE_REPO}/${DRONE_BRANCH}
