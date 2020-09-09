@@ -1,0 +1,13 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: docker
+    image: plugins/docker
+    settings:
+      repo: registry.cn-beijing.aliyuncs.com/ismewen/ismewen
+      registry: registry.cn-beijing.aliyuncs.com
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
