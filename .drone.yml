@@ -14,9 +14,6 @@ steps:
     volumes:
       - name: dockercache
         path: /var/lib/docker
-  volumes:
-    - name: dockercache
-      path: /var/lib/docker
 volumes:
 - name: dockercache
   host:
