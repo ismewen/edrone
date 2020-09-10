@@ -5,8 +5,8 @@ steps:
   - name: docker
     image: plugins/docker
     settings:
-      repo: registry.cn-beijing.aliyuncs.com/ismewen/edrone
-      registry: registry.cn-beijing.aliyuncs.com
+      repo: registry.cn-hangzhou.aliyuncs.com/ismewen/edrone
+      registry: registry.cn-hangzhou.aliyuncs.com
       username:
         from_secret: docker_username
       password:
