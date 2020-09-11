@@ -5,12 +5,11 @@ steps:
   - name: docker
     image: plugins/docker
     settings:
-      repo: registry.cn-hangzhou.aliyuncs.com/ismewen/edrone
-      registry: registry.cn-hangzhou.aliyuncs.com
+      repo: fscripy/edrone
       username:
-        from_secret: docker_username
+        from_secret: fscripyu_username
       password:
-        from_secret: docker_password
+        from_secret: fscripyu_password
     volumes:
       - name: dockercache
         path: /var/lib/docker
