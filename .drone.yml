@@ -13,6 +13,27 @@ steps:
     volumes:
       - name: dockercache
         path: /var/lib/docker
+  - name: deploy
+    image: quay.io/ipedrazas/drone-helm
+    environment:
+      SERVICE_ACCOUNT: admin-user
+      API_SERVER:
+        from_secret: api_server
+      KUBERNETES_TOKEN:
+        from_secret: k8s_token
+      KUBERNETES_CERTIFICATE:
+        from_secret: k8s_ca
+    settings:
+      client-only: true
+      wait: true
+      recreate_pods: true
+      chart: ./edrone
+      release: edrone
+      values_files: ["./edrone/values.yaml"]
+      namespace: edrone
+    when:
+      event: push
+      branch: master
 volumes:
 - name: dockercache
   host:
