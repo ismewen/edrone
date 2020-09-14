@@ -18,7 +18,7 @@ steps:
     environment:
       SERVICE_ACCOUNT: admin-user
       API_SERVER:
-        from_secret: api_server
+        from_secret: k8s_api_server
       KUBERNETES_TOKEN:
         from_secret: k8s_token
       KUBERNETES_CERTIFICATE:
