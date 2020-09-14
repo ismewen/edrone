@@ -129,3 +129,53 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 DEBUG = False
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(lineno)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        'mail_admins': {
+            'level': 'INFO',
+            'class': 'django.utils.log.AdminEmailHandler',
+        },
+        'file': {
+            'level': 'INFO',
+            'filters': [],
+            'filename': os.path.join(BASE_DIR, 'default.log'),
+            'class': 'logging.FileHandler',
+            'formatter': 'verbose'
+        },
+        'celery': {
+            'level': 'INFO',
+            'filters': [],
+            'filename': os.path.join(BASE_DIR, 'celery.log'),
+            'class': 'logging.FileHandler',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'default': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+        },
+    }
+}
