@@ -27,6 +27,7 @@ steps:
       helm_command: upgrade
       wait: true
       force: true
+      namespace: edrone
 
 volumes:
 - name: dockercache
