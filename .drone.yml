@@ -44,6 +44,7 @@ steps:
       wait: true
       force: true
       namespace: edrone
+      vaules_yaml: ["./edrone/values.yaml"]
 
 volumes:
 - name: dockercache
