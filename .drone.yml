@@ -43,6 +43,7 @@ steps:
       helm_command: upgrade
       wait: true
       force: true
+      namespace: default
       vaules_yaml: ["./edrone/values.yaml"]
 
 volumes:
