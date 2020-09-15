@@ -13,12 +13,28 @@ steps:
     volumes:
       - name: dockercache
         path: /var/lib/docker
+#  - name: deploy
+#    image: pelotech/drone-helm3
+#    settings:
+#      api_server:
+#        from_secret: k8s_api_server
+#      kubernetes_token:
+#        from_secret: k8s_token
+#      kube_certificate:
+#        from_secret: k8s_ca
+#      chart: ./edrone
+#      release: edrone
+#      helm_command: upgrade
+#      wait: true
+#      force: true
+#      namespace: edrone
+
   - name: deploy
-    image: pelotech/drone-helm3
+    image: bitsbeats/drone-helm3
     settings:
-      api_server:
+      kube_api_server:
         from_secret: k8s_api_server
-      kubernetes_token:
+      kube_token:
         from_secret: k8s_token
       kube_certificate:
         from_secret: k8s_ca
