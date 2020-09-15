@@ -4,9 +4,11 @@ backcall==0.2.0
 decorator==4.4.2
 Django==3.1
 djangorestframework==3.11.1
+dutils==0.1.0
 ipython==7.18.1
 ipython-genutils==0.2.0
 jedi==0.17.2
+Markdown==3.2.2
 parso==0.7.1
 pexpect==4.8.0
 pickleshare==0.7.5
@@ -16,5 +18,7 @@ Pygments==2.6.1
 pytz==2020.1
 sqlparse==0.3.1
 traitlets==5.0.4
+transitions==0.7.1
 wcwidth==0.2.5
+Werkzeug==0.16.0
 wtfpython==0.2.1
