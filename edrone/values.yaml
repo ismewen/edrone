@@ -48,10 +48,10 @@ ingress:
   hosts:
     - host: edrone-demo.ismewen.com
       paths: ["/"]
-#  tls:
-#    - secretName: edrone-demo-tls
-#      hosts:
-#        - edrone-demo.ismewen.com
+  tls:
+    - secretName: edrone-demo-tls
+      hosts:
+        - edrone-demo.ismewen.com
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
