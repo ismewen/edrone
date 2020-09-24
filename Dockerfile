@@ -3,7 +3,7 @@ RUN mkdir /code
 ADD ./requirements.txt /code/requirements.txt
 WORKDIR /code
 #RUN pip install -r requirements.txt -i  https://pypi.tuna.tsinghua.edu.cn/simple
-RUN pip install -r requirements.txt -i
+RUN pip install -r requirements.txt
 COPY . /code
 CMD pip install ./dutils
 EXPOSE 8000
