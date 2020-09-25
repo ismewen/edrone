@@ -75,6 +75,7 @@ class EdroneAPIView(APIView):
 
     def post(self, *args, **kwargs):
         logger.info(self.request.data)
-        return HttpResponse(yaml)
+        import json
+        return HttpResponse(json.dumps({"data": yaml}))
 
     get = post
