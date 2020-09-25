@@ -24,7 +24,6 @@ logger = logging.getLogger("default")
 
 
 def index(request):
-    logger.info(request)
     return HttpResponse("index")
 
 
