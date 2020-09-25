@@ -1,6 +1,14 @@
+appnope==0.1.0
+asgiref==3.2.10
+backcall==0.2.0
+certifi==2020.6.20
+chardet==3.0.4
+decorator==4.4.2
 Django==3.1
 djangorestframework==3.11.1
+djangorestframework-yaml==2.0.0
 idna==2.10
+ipdb==0.13.3
 ipython==7.18.1
 ipython-genutils==0.2.0
 jedi==0.17.2
