@@ -1,7 +1,5 @@
 Django==3.1
 djangorestframework==3.11.1
-djangorestframework-yaml==2.0.0
-dutils==0.1.0
 idna==2.10
 ipython==7.18.1
 ipython-genutils==0.2.0
