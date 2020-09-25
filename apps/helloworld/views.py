@@ -5,6 +5,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 
 # Create your views here.
+from rest_framework_yaml.renderers import YAMLRenderer
 
 logger = logging.getLogger("default")
 
@@ -70,7 +71,7 @@ def hello_world(requests):
 
 
 class EdroneAPIView(APIView):
-    media_type = 'application/json'
+    renderer_classes = (YAMLRenderer,)
 
     def post(self, *args, **kwargs):
         logger.info(self.request.data)
