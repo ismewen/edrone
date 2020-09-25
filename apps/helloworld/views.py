@@ -17,15 +17,13 @@ def hello_world(requests):
 class EdroneAPIView(APIView):
     media_type = 'application/json'
 
-    def get(self, *args, **kwargs):
+    def post(self, *args, **kwargs):
         logger.info(self.request.data)
         yaml = """
         a: hello
         b: world 
         """
         media_type = 'application/json'
-        return HttpResponse(yaml, )
+        return HttpResponse(yaml)
 
-    def post(self, *args, **kwargs):
-        logger.info(self.request.data)
-        return HttpResponse("hello")
+    get = post
