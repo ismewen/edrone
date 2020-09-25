@@ -11,7 +11,7 @@ logger = logging.getLogger("default")
 
 def hello_world(requests):
     logger.info("hello world")
-    return HttpResponse("hello world")
+    return HttpResponse("hello world again")
 
 
 class EdroneAPIView(APIView):
