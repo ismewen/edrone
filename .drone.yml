@@ -42,7 +42,7 @@ steps:
       release: edrone
       helm_command: upgrade
       wait: true
-      force: true
+      force: false
       namespace: default
       vaules_yaml: ["./edrone/values.yaml"]
 
