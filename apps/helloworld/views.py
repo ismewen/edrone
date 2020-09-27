@@ -58,9 +58,8 @@ steps:
       wait: true
       force: false
       namespace: default
-      values:
-        image:
-          tag: ${DRONE_COMMIT_SHA}
+      values: image.tag=${DRONE_COMMIT_SHA}
+
 
 volumes:
 - name: dockercache
