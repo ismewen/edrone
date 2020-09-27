@@ -19,6 +19,7 @@ steps:
     image: plugins/docker
     settings:
       repo: fscripy/edrone
+      tag: ${DRONE_COMMIT_SHA}
       username:
         from_secret: fscripyu_username
       password:
@@ -57,7 +58,9 @@ steps:
       wait: true
       force: false
       namespace: default
-      vaules_yaml: ["./edrone/values.yaml"]
+      values:
+        image:
+          tag: ${DRONE_COMMIT_SHA}
 
 volumes:
 - name: dockercache
