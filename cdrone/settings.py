@@ -192,3 +192,5 @@ REST_FRAMEWORK = {
 
     ]
 }
+
+DEBUG = True

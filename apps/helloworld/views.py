@@ -2,6 +2,7 @@ import logging
 
 from django.http import HttpResponse
 from django.shortcuts import render
+from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 
 # Create your views here.
@@ -70,12 +71,31 @@ def hello_world(requests):
     return HttpResponse("hello world again")
 
 
+# /usr/local/lib/python3.8/site-packages/rest_framework_yaml/renderers.py
+
+from rest_framework.negotiation import BaseContentNegotiation
+
+
+class IgnoreClientContentNegotiation(BaseContentNegotiation):
+    def select_parser(self, request, parsers):
+        """
+        Select the first parser in the `.parser_classes` list.
+        """
+        return parsers[0]
+
+    def select_renderer(self, request, renderers, format_suffix):
+        """
+        Select the first renderer in the `.renderer_classes` list.
+        """
+        return (renderers[0], renderers[0].media_type)
+
+
 class EdroneAPIView(APIView):
-    renderer_classes = (YAMLRenderer,)
+    content_negotiation_class = IgnoreClientContentNegotiation
 
     def post(self, *args, **kwargs):
         logger.info(self.request.data)
         import json
-        return HttpResponse(json.dumps({"data": yaml}))
+        return HttpResponse(json.dumps({"Data": yaml}))
 
     get = post
