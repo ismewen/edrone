@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.helloworld',
+    'apps.drone',
     'rest_framework',
 ]
 
@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'cdrone.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'edrone',
+        'USER': 'edrone',
+        'PASSWORD': 'aA314159wen',
+        'HOST': 'postgresql-13293-0.cloudclusters.net',
+        'PORT': '13314',
     }
 }
 
