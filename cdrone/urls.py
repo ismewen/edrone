@@ -18,7 +18,7 @@ import logging
 from django.contrib import admin
 from django.http import HttpResponse
 from django.urls import path
-import apps.helloworld.urls
+import apps.drone.urls
 
 logger = logging.getLogger("default")
 
@@ -32,4 +32,4 @@ urlpatterns = [
     path('', index)
 ]
 
-urlpatterns = urlpatterns + apps.helloworld.urls.urlpatterns
+urlpatterns = urlpatterns + apps.drone.urls.urlpatterns
