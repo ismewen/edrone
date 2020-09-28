@@ -1,26 +1,34 @@
+import os
+from django.conf import settings
+
+
 class DroneParse(object):
-    """
-            data = {
-            'build': {'id': 36, 'repo_id': 2, 'trigger': 'ismewen', 'number': 36, 'status': 'pending', 'event': 'push',
-                      'action': '', 'link': 'https://github.com/ismewen/edrone/compare/4c6512ca4ebb...ba52a49c188f',
-                      'timestamp': 0, 'message': 'sha tag', 'before': '4c6512ca4ebbd9f9e897b15024c15561cd9b5152',
-                      'after': 'ba52a49c188f208885119ca6791fddfef802e49e', 'ref': 'refs/heads/master',
-                      'source_repo': '',
-                      'source': 'master', 'target': 'master', 'author_login': '', 'author_name': 'ismewen',
-                      'author_email': 'ismewen@MacBook-Air.local',
-                      'author_avatar': 'https://avatars0.githubusercontent.com/u/30500262?v=4', 'sender': 'ismewen',
-                      'started': 0, 'finished': 0, 'created': 1601197804, 'updated': 1601197804, 'version': 1},
-            'repo': {'id': 2, 'uid': '293063525', 'user_id': 1, 'namespace': 'ismewen', 'name': 'edrone',
-                     'slug': 'ismewen/edrone', 'scm': '', 'git_http_url': 'https://github.com/ismewen/edrone.git',
-                     'git_ssh_url': 'git@github.com:ismewen/edrone.git', 'link': 'https://github.com/ismewen/edrone',
-                     'default_branch': 'master', 'private': False, 'visibility': 'public', 'active': True,
-                     'config_path': '.drone.yml', 'trusted': True, 'protected': False, 'ignore_forks': False,
-                     'ignore_pull_requests': False, 'timeout': 60, 'counter': 0, 'synced': 0, 'created': 0,
-                     'updated': 0,
-                     'version': 0}}
-    """
+    DEFAULT_YAML = "./projects/default.yaml"
 
     def __init__(self, drone_push_params):
         self.drone_push_params = drone_push_params
 
+    @property
+    def branch(self):
+        return self.drone_push_params.get("build").get("source")
+
+    @property
+    def repo_namespace(self):
+        return self.drone_push_params.get("repo").get("namespace")
+
+    @property
     def repo_name(self):
+        return self.drone_push_params.get("repo").get("name")
+
+    def get_yaml(self):
+        yaml_position_directory = str(settings.BASE_DIR) + "/projects/{repo_name}/".format(
+            repo_name=self.repo_name,
+        )
+        if os.path.exists(yaml_position_directory + "{branch_name}.yaml".format(branch_name=self.branch)):
+            yaml_file = yaml_position_directory + "{branch_name}.yaml".format(branch_name=self.branch)
+        elif os.path.exists(yaml_position_directory + "default.yaml"):
+            yaml_file = yaml_position_directory + "default.yaml"
+        else:
+            yaml_file = self.DEFAULT_YAML
+        with open(yaml_file, "r") as f:
+            return f.read()
