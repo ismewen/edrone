@@ -24,7 +24,7 @@ logger = logging.getLogger("default")
 
 
 def index(request):
-    return HttpResponse("master")
+    return HttpResponse("master update")
 
 
 urlpatterns = [
