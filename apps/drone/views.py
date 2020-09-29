@@ -2,40 +2,17 @@ import json
 import logging
 
 from django.http import HttpResponse
-from django.shortcuts import render
-from rest_framework.renderers import JSONRenderer
+from rest_framework.decorators import action
 from rest_framework.views import APIView
 
-# Create your views here.
-from rest_framework_yaml.renderers import YAMLRenderer
+from apps.drone import serializers
+from apps.drone.dronehelper import DroneParse
+from apps.drone.models import Repos, Builds
 
-from apps.drone.droneparse import DroneParse
+from cdrone.core import APIViewSet, router
+from cdrone.negotiation import IgnoreClientContentNegotiation
 
 logger = logging.getLogger("default")
-
-
-def hello_world(requests):
-    logger.info("hello world")
-    return HttpResponse("hello world again")
-
-
-# /usr/local/lib/python3.8/site-packages/rest_framework_yaml/renderers.py
-
-from rest_framework.negotiation import BaseContentNegotiation
-
-
-class IgnoreClientContentNegotiation(BaseContentNegotiation):
-    def select_parser(self, request, parsers):
-        """
-        Select the first parser in the `.parser_classes` list.
-        """
-        return parsers[0]
-
-    def select_renderer(self, request, renderers, format_suffix):
-        """
-        Select the first renderer in the `.renderer_classes` list.
-        """
-        return (renderers[0], renderers[0].media_type)
 
 
 class EdroneAPIView(APIView):
@@ -50,3 +27,28 @@ class EdroneAPIView(APIView):
         return HttpResponse(json.dumps({"Data": drone_yaml}))
 
     get = post
+
+
+class BuildAPIViewSet(APIViewSet):
+    custom_name = "build"
+    path = "builds"
+
+    model = Builds
+    serializer_class = serializers.BuildSerializer
+
+    serializer_mapping = {
+        "create": serializers.BuildCreateSerializer
+    }
+
+
+class RepoAPIViewSet(APIViewSet):
+    custom_name = "repo"
+    path = "repos"
+
+    nested_viewsets = [BuildAPIViewSet]
+
+    model = Repos
+    serializer_class = serializers.RepoSerializer
+
+
+router.custom_register(RepoAPIViewSet)

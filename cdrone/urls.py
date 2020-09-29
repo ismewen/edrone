@@ -17,19 +17,24 @@ import logging
 
 from django.contrib import admin
 from django.http import HttpResponse
-from django.urls import path
-import apps.drone.urls
+from django.urls import path, include
+
+from cdrone import discovery
+from cdrone.core import router
 
 logger = logging.getLogger("default")
+discovery.auto_discovery()
 
 
 def index(request):
     return HttpResponse("明先")
 
-
+import ipdb
+ipdb.set_trace()
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index)
+    path('', index),
+    path('v1/', include(router.get_urls()))
 ]
 
-urlpatterns = urlpatterns + apps.drone.urls.urlpatterns
+urlpatterns += discovery.auto_get_urlpatterns()

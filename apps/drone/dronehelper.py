@@ -1,6 +1,8 @@
 import os
 from django.conf import settings
 
+from apps.drone.models import Repos
+
 
 class DroneParse(object):
     DEFAULT_YAML = "./projects/default.yaml"
@@ -32,3 +34,14 @@ class DroneParse(object):
             yaml_file = self.DEFAULT_YAML
         with open(yaml_file, "r") as f:
             return f.read()
+
+
+class DroneHelper(object):
+
+    def __init__(self, repo: Repos):
+        self.repo = repo
+
+    def create_build(self):
+        Bui
+
+
