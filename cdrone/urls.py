@@ -29,8 +29,6 @@ discovery.auto_discovery()
 def index(request):
     return HttpResponse("明先")
 
-import ipdb
-ipdb.set_trace()
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
