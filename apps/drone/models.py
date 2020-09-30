@@ -1,8 +1,8 @@
 from django.conf import settings
 from django.db import models
 
-from PyDroneio.drone import http
-from PyDroneio.drone.drone import Drone
+from pydrone.drone import http
+from pydrone.drone import Drone
 
 
 class Builds(models.Model):
