@@ -27,7 +27,8 @@ discovery.auto_discovery()
 
 
 def index(request):
-    return HttpResponse("明先")
+    return HttpResponse("master")
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

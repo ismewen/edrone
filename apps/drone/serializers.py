@@ -16,9 +16,13 @@ class BuildSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class BuildCreateSerializer(serializers.ModelSerializer):
+class BuildCreateSerializer(serializers.Serializer):
     repo = NestedModelField(Repos, lookup_field="pk")
+    branch = serializers.CharField()
 
-    class Meta:
-        model = Builds
-        fields = "__all__"
+    def create(self, validated_data):
+        repo = validated_data.get("repo")
+        branch = validated_data.get("branch")
+        res = repo.create_build(branch=branch)
+        build = Builds.objects.all().get(pk=res.get_id())
+        return build

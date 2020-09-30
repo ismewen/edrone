@@ -41,7 +41,13 @@ class DroneHelper(object):
     def __init__(self, repo: Repos):
         self.repo = repo
 
-    def create_build(self):
-        Bui
-
-
+    def create_build(self, params):
+        assert "message" in params
+        assert "branch" in params
+        user = self.repo.user
+        build_params = {
+            "build_message": params.get("message"),
+            "build_source": params.get("branch"),
+            "build_trigger": params.get("branch")
+        }
+        assert ""

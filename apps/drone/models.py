@@ -1,4 +1,8 @@
+from django.conf import settings
 from django.db import models
+
+from PyDroneio.drone import http
+from PyDroneio.drone.drone import Drone
 
 
 class Builds(models.Model):
@@ -180,6 +184,32 @@ class Repos(models.Model):
     class Meta:
         managed = False
         db_table = 'repos'
+
+    @property
+    def user(self):
+        return Users.objects.all().get(user_id=self.repo_user_id)
+
+    @property
+    def repo_action(self):
+        return Drone().Repo(self.user.user_login, self.repo_name)
+
+    @property
+    def build_action(self):
+        return Drone().Build(self.user.user_login, self.repo_name)
+
+    @property
+    def provider_info(self):
+        repo_action = self.repo_action
+        return repo_action.info()
+
+    def create_build(self, branch="master"):
+        host = self.build_action.host
+        url = host + "/api/repos/{namespace}/{name}/builds?branch={branch}".format(
+            namespace=self.repo_namespace,
+            name=self.repo_name,
+            branch=branch
+        )
+        return http.post(url)
 
 
 class Secrets(models.Model):
