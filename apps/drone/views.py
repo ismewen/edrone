@@ -24,6 +24,7 @@ class EdroneAPIView(APIView):
         drone_yaml = dp.get_yaml()
         logger.info("Get drone yaml")
         logger.info(drone_yaml)
+        logger.info(self.request.headers)
         return HttpResponse(json.dumps({"Data": drone_yaml}))
 
     get = post

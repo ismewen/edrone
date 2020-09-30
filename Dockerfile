@@ -5,6 +5,6 @@ WORKDIR /code
 RUN pip install -r requirements.txt -i  https://pypi.tuna.tsinghua.edu.cn/simple
 #RUN pip install -r requirements.txt
 COPY . /code
-RUN pip install ./dutils
+RUN pip install ./third_party/dutils
 EXPOSE 8000
 CMD python manage.py runserver 0.0.0.0:8000
