@@ -27,7 +27,7 @@ discovery.auto_discovery()
 
 
 def index(request):
-    return HttpResponse("master")
+    return HttpResponse("hello, develop")
 
 
 urlpatterns = [
