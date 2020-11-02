@@ -27,8 +27,7 @@ discovery.auto_discovery()
 
 
 def index(request):
-    return HttpResponse("hello, develop!!!")
-
+    return HttpResponse("hello, develop-2020-11-02!!!")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
