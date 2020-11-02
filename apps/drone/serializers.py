@@ -24,5 +24,5 @@ class BuildCreateSerializer(serializers.Serializer):
         repo = validated_data.get("repo")
         branch = validated_data.get("branch")
         res = repo.create_build(branch=branch)
-        build = Builds.objects.all().get(pk=res.get_id())
+        build = Builds.objects.all().get(pk=res.get("id"))
         return build

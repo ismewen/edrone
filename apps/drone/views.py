@@ -3,6 +3,7 @@ import logging
 
 from django.http import HttpResponse
 from rest_framework.decorators import action
+from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.drone import serializers
@@ -40,6 +41,12 @@ class BuildAPIViewSet(APIViewSet):
     serializer_mapping = {
         "create": serializers.BuildCreateSerializer
     }
+
+    def create(self, *args, **kwargs):
+        s = self.get_serializer_class()(data=self.request.data)
+        s.is_valid()
+        obj = s.save()
+        return Response(serializers.BuildSerializer(obj).data)
 
 
 class RepoAPIViewSet(APIViewSet):
